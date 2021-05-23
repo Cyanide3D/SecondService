@@ -10,19 +10,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/serialize")
 public class SerializeController {
 
     @Autowired
     private SchedulerService schedulerService;
 
-    @GetMapping
+    @GetMapping("/serialize")
     @SneakyThrows
     public List<Ship> deserializeSchedule(@RequestParam(value = "file", required = false) String param) {
-        return schedulerService.getSchedulesFromFile(param);
+        return schedulerService.getSchedulesFromService();
     }
 
-    @PostMapping
+    @GetMapping("getJson/{name}")
+    public String deserializeJson(@PathVariable String filename) {
+        return schedulerService.getSchedulesFromCurrentFile(filename);
+    }
+
+    @PostMapping("/serialize")
     public void serialize(@RequestBody Report report) {
         schedulerService.saveReport(report);
     }

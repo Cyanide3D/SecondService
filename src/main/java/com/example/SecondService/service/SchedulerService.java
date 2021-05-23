@@ -25,24 +25,19 @@ public class SchedulerService {
     private ObjectMapper objectMapper;
     String schedulesURL = "http://localhost:8081/scheduler";
 
-    public List<Ship> getSchedulesFromFile(String file) {
-        List<Ship> ships;
-        if (file == null) {
-            ships = downloadSchedules();
-        } else {
-            ships = getSchedulesFromCurrentFile(file);
-        }
+    public List<Ship> getSchedulesFromService() {
+        List<Ship> ships = downloadSchedules();
         saveSchedules(ships);
 
         return ships;
     }
 
     @SneakyThrows
-    private List<Ship> getSchedulesFromCurrentFile(String file) {
+    public String getSchedulesFromCurrentFile(String filename) {
         try {
-            return objectMapper.readValue(Files.newInputStream(Paths.get(file)), new TypeReference<List<Ship>>(){});
+            return objectMapper.readValue(Files.newInputStream(Paths.get(filename)), String.class);
         } catch (Exception e) {
-            return new ArrayList<>();
+            return "";
         }
     }
 
