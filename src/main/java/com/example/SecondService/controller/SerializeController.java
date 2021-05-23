@@ -17,7 +17,7 @@ public class SerializeController {
 
     @GetMapping("/serialize")
     @SneakyThrows
-    public List<Ship> deserializeSchedule(@RequestParam(value = "file", required = false) String param) {
+    public List<Ship> deserializeSchedule() {
         return schedulerService.getSchedulesFromService();
     }
 
