@@ -2,6 +2,7 @@ package com.example.SecondService.controller;
 
 import com.example.SecondService.model.Report;
 import com.example.SecondService.model.Ship;
+import com.example.SecondService.model.SimpleUnloadingReport;
 import com.example.SecondService.service.SchedulerService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class SerializeController {
     }
 
     @PostMapping("/serialize")
-    public void serialize(@RequestBody Report report) {
-        schedulerService.saveReport(report);
+    public void serialize(@RequestBody List<SimpleUnloadingReport> reports) {
+        schedulerService.saveReport(reports);
     }
 
 }

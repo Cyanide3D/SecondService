@@ -2,6 +2,7 @@ package com.example.SecondService.service;
 
 import com.example.SecondService.model.Report;
 import com.example.SecondService.model.Ship;
+import com.example.SecondService.model.SimpleUnloadingReport;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -69,8 +70,8 @@ public class SchedulerService {
     }
 
     @SneakyThrows
-    public void saveReport(Report report) {
-        objectMapper.writeValue(new File(UUID.randomUUID().toString() + ".json"), report);
+    public void saveReport(List<SimpleUnloadingReport> reports) {
+        objectMapper.writeValue(new File(UUID.randomUUID().toString() + ".json"), reports);
     }
 
     @SneakyThrows
