@@ -22,7 +22,7 @@ public class SerializeController {
     }
 
     @GetMapping("getJson/{name}")
-    public String deserializeJson(@PathVariable String filename) {
+    public String deserializeJson(@PathVariable("name") String filename) {
         return schedulerService.getSchedulesFromCurrentFile(filename);
     }
 
