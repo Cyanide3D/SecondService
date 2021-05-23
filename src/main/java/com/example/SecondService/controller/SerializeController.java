@@ -5,6 +5,7 @@ import com.example.SecondService.model.Ship;
 import com.example.SecondService.service.SchedulerService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class SerializeController {
         return schedulerService.getSchedulesFromService();
     }
 
-    @GetMapping("getJson/{name}")
+    @GetMapping(value = "getJson/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String deserializeJson(@PathVariable("name") String filename) {
         return schedulerService.getSchedulesFromCurrentFile(filename);
     }

@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -35,7 +36,7 @@ public class SchedulerService {
     @SneakyThrows
     public String getSchedulesFromCurrentFile(String filename) {
         try {
-            return objectMapper.readValue(Files.newInputStream(Paths.get(filename)), String.class);
+            return Files.readString(Path.of(filename));
         } catch (Exception e) {
             return "";
         }
