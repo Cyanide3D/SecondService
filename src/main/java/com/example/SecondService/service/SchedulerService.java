@@ -45,7 +45,7 @@ public class SchedulerService {
     @SneakyThrows
     public String getSchedulesFromCurrentFile(String filename) {
         try {
-            return Files.readString(Path.of(filename));
+            return Files.readString(Path.of("scheduled/" + filename + ".json"));
         } catch (Exception e) {
             return "";
         }
