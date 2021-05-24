@@ -14,6 +14,6 @@ public class ContextRefreshListener implements ApplicationListener<ContextRefres
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        schedulerService.saveScheduleFromConsole();
+        schedulerService.addShip();
     }
 }
