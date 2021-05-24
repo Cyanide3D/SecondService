@@ -27,6 +27,13 @@ public class SchedulerService {
     private ObjectMapper objectMapper;
     String schedulesURL = "http://localhost:8081/scheduler";
 
+    @PostConstruct
+    @SneakyThrows
+    public void init() {
+        Files.createDirectories(Path.of("scheduled/"));
+        Files.createDirectories(Path.of("reports/"));
+    }
+
     public List<Ship> getSchedulesFromService() {
         List<Ship> ships = downloadSchedules();
         saveSchedules(ships);
@@ -45,7 +52,7 @@ public class SchedulerService {
 
     private void saveSchedules(List<Ship> ships) {
         try {
-            objectMapper.writeValue(new File(UUID.randomUUID().toString() + ".json"), ships);
+            objectMapper.writeValue(new File("scheduled/" + UUID.randomUUID().toString() + ".json"), ships);
         } catch (Exception e) {
             System.out.println("can't save");
         }
@@ -62,7 +69,7 @@ public class SchedulerService {
                 Ship ship = objectMapper.readValue(json, Ship.class);
 
                 schedulesFromFile.add(ship);
-                objectMapper.writeValue(new File(UUID.randomUUID().toString() + ".json"), schedulesFromFile);
+                objectMapper.writeValue(new File("scheduled/" + UUID.randomUUID().toString() + ".json"), schedulesFromFile);
             } catch (Exception e) {
                 System.out.println("Something wrong!");
             }
@@ -71,7 +78,7 @@ public class SchedulerService {
 
     @SneakyThrows
     public void saveReport(List<SimpleUnloadingReport> reports) {
-        objectMapper.writeValue(new File(UUID.randomUUID().toString() + ".json"), reports);
+        objectMapper.writeValue(new File("reports/" + UUID.randomUUID().toString() + ".json"), reports);
     }
 
     @SneakyThrows
